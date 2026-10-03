@@ -11,6 +11,8 @@ public class StudentRepository {
     String username = "root";
     String password = "cvm1196";
 
+    Connection connection = null;
+    PreparedStatement preparedStatement;
 
     public void createUser(){
         try {
@@ -80,6 +82,44 @@ public class StudentRepository {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    public void completeCrud(Student student){
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            String query = """
+                           INSERT INTO (name, email, age) 
+                               VALUES(?,?,?)
+                               """;
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, student.getName());
+            preparedStatement.setString(2,student.getEmail());
+            preparedStatement.setInt(3, student.getAge());
+            int rowafftectd = preparedStatement.executeUpdate();
+
+            if(rowafftectd==1){
+                System.out.println("Creation successfull");
+            }else{
+                System.out.println("cretion failed");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+
+            try{
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try{
+                connection.close();
+            } catch (SQLException e) {
+               e.printStackTrace();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package in.strikes;
 
+import in.strikes.models.Student;
 import in.strikes.repository.StudentRepository;
 
 import java.sql.Connection;
@@ -10,7 +11,7 @@ public class Main {
     static void main() {
         System.out.println("Helo World");
         StudentRepository studentRepository = new StudentRepository();
-        studentRepository.getUserById();
+        studentRepository.completeCrud(new Student("shivam","shivam@gmail.com",12));
 
 
     }
