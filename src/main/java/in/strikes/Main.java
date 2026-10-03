@@ -1,19 +1,11 @@
 package in.strikes;
 
-import in.strikes.models.Student;
-import in.strikes.repository.StudentRepository;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
+@SpringBootApplication
 public class Main {
-    static void main() {
-        System.out.println("Helo World");
-        StudentRepository studentRepository = new StudentRepository();
-        studentRepository.completeCrud(new Student("shivam","shivam@gmail.com",12));
-
-
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
     }
 }
-

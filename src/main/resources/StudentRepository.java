@@ -1,9 +1,11 @@
 package in.strikes.repository;
 
 import in.strikes.models.Student;
-import org.springframework.stereotype.Repository;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class StudentRepository {
@@ -11,6 +13,8 @@ public class StudentRepository {
     String url = "jdbc:mysql://localhost:3306/student_db";
     String username = "root";
     String password = "cvm1196";
+
+
 
     public void completeCrud(Student student){
         String query = "INSERT INTO students (name, email, age) VALUES(?,?,?)";
@@ -51,6 +55,7 @@ public class StudentRepository {
             throw new RuntimeException(e);
         }
     }
+
 
     public void updateUser(Student student, Long id){
         String query = "UPDATE students SET name = ?, email = ?, age = ? WHERE id = ?";
@@ -105,6 +110,10 @@ public class StudentRepository {
             throw new RuntimeException(e);
         }
     }
+
+
+
+
 
     private Student mapRow(ResultSet resultSet) throws SQLException {
         Student student = new Student();
